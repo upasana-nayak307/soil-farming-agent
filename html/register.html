@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Soil Farming Agent</title>
+  <link href="../css/register.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
+ </head>
+ <body class="h-full">
+  <div class="app-wrapper">
+   <div class="login-container">
+    <div class="login-header">
+     <a href="../index.html" class="login-logo">
+      <div class="login-logo-icon">
+       🌱
+      </div><span class="login-logo-text">SoilAgent</span> </a>
+     <h1 class="login-title">Join Our Community</h1>
+     <p class="login-subtitle">Create your farming account today</p>
+    </div>
+    <form id="registrationForm" novalidate onsubmit="handleRegistration(event)" method="post">
+     <!-- Role Selector -->
+     <div class="form-group">
+      <label class="form-label">I am a:</label>
+      <div class="role-selector">
+       <div class="role-option">
+        <input type="radio" id="roleFarmer" name="role" value="farmer" checked> 
+        <label for="roleFarmer" class="role-label">👨‍🌾 Farmer</label>
+       </div>
+       <div class="role-option">
+        <input type="radio" id="roleAdmin" name="role" value="admin"> 
+        <label for="roleAdmin" class="role-label">👔 Admin</label>
+       </div>
+      </div>
+      <div class="error-message" id="roleError"></div>
+     </div>
+     
+     <!-- Full Name Field -->
+     <div class="form-group">
+      <label for="fullName" class="form-label">Full Name</label> 
+      <input type="text" id="fullName" name="fullName" class="form-input" placeholder="John Doe" required>
+      <div class="error-message" id="nameError"></div>
+     </div>
+     
+     <!-- Email Field -->
+     <div class="form-group">
+      <label for="email" class="form-label">Email Address</label> 
+      <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required>
+      <div class="error-message" id="emailError"></div>
+     </div>
+     
+     <!-- Password Field -->
+     <div class="form-group">
+      <label for="password" class="form-label">Password</label> 
+      <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" required>
+      <div class="error-message" id="passwordError"></div>
+     </div>
+    <!-- Success Overlay -->
+    <div class="success-overlay" id="successOverlay" role="dialog" aria-modal="true" aria-label="Registration successful">
+    <div class="success-card">
+      <div class="success-check">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h2 class="success-title">Welcome Aboard!</h2>
+      <p class="success-text">Your account has been created successfully. 
+        You can now sign in to the soil farming agent System.</p>
+    </div>
+    </div>
+     <!-- Register Button --> 
+     <button class="login-btn" id="registerBtn"> Create Account </button>
+    </form>
+    <div class="login-footer">
+     <p class="login-footer-text">Already have an account? 
+        <a href="./login.html" class="login-footer-link"> Sign In </a>
+    </p>
+    </div>
+   </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../javascript/register.js"></script>
+</body>
+</html>

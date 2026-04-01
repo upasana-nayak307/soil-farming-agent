@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en" style="height:100%">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soil Farming Agent</title>
+  <link href="./css/index.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+ </head>
+ <body>
+  <div class="app-wrapper">
+    <!-- NAVBAR -->
+   <nav class="nav-bar" id="navbar">
+    <div class="nav-inner">
+    <a href="#" class="nav-logo" onclick="event.preventDefault()">
+      <div class="nav-logo-icon">
+        🌱
+      </div>
+      <span class="nav-logo-text">SoilAgent</span> 
+    </a>
+     <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="./html/about.html">About us</a></li>
+      <li>
+        <a href="./views/admin/dashboard.html" id="dashboard" style="display: none;">Dashboard</a>
+      </li>
+      <li>
+        <a href="./html/login.html" class="btn-login" id="login">Login</a>
+      </li>
+      <li>
+        <a href="#" class="btn-register" id="logout" style="display: none;" onclick="handleLogout()">Logout</a>
+      </li>
+      <li><a href="./html/register.html" class="btn-register" id="register">Register</a></li>
+      <li>
+        <div class="profile-circle" id="userAvatar">FN</div>
+      </li>
+     </ul>
+     <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+        <i data-lucide="menu" style="width:24px;height:24px"></i>
+     </button>
+    </div>
+   </nav>
+   <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="event.preventDefault(); closeMobile()">Home</a> 
+    <a href="#features" onclick="event.preventDefault(); closeMobile()">Features</a> 
+    <a href="#login" onclick="event.preventDefault(); closeMobile()">Login</a> 
+    <a href="#register" onclick="event.preventDefault(); closeMobile()">Register</a>
+   </div>
+   
+   <!-- HERO -->
+   <section class="hero-section" id="home">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-bg-pattern-2"></div>
+    <div class="hero-inner">
+     <div class="hero-content">
+      <div class="hero-badge"><i data-lucide="leaf" style="width:14px;height:14px"></i> Agriculture Intelligence
+      </div>
+      <h1 class="hero-heading" id="heroHeading">Smart Farming Starts with <span class="highlight">Soil Knowledge</span></h1>
+      <p class="hero-desc" id="heroDesc">
+        Empowering farmers with data-driven insights to choose the right crops based on soil type, 
+        boosting yield and sustainability for every harvest.
+      </p>
+      <div class="hero-buttons">
+        <a href="#" class="btn-primary" onclick="event.preventDefault(); document.getElementById('features').scrollIntoView({behavior:'smooth'})"> Get Started 
+            <i data-lucide="arrow-right" style="width:18px;height:18px"></i> 
+        </a> 
+        <a href="#" class="btn-secondary" onclick="event.preventDefault(); document.getElementById('features').scrollIntoView({behavior:'smooth'})"> Learn More 
+            <i data-lucide="chevron-down" style="width:18px;height:18px"></i> 
+        </a>
+      </div>
+     </div>
+     <div class="hero-visual">
+      <div class="hero-card">
+       <div class="hero-card-top">
+        <span class="hc-dot hc-dot-1"></span> 
+        <span class="hc-dot hc-dot-2"></span> 
+        <span class="hc-dot hc-dot-3"></span>
+       </div>
+       <div class="hero-card-row">
+        <span class="hcr-label">Soil pH</span> 
+        <span class="hcr-value">6.8</span>
+       </div>
+       <div class="hero-card-row">
+        <span class="hcr-label">Nitrogen</span>
+        <div class="hcr-bar">
+         <div class="hcr-bar-fill" id="bar1" style="width:0%"></div>
+        </div>
+       </div>
+       <div class="hero-card-row">
+        <span class="hcr-label">Phosphorus</span>
+        <div class="hcr-bar">
+         <div class="hcr-bar-fill" id="bar2" style="width:0%"></div>
+        </div>
+       </div>
+       <div class="hero-card-row">
+        <span class="hcr-label">Potassium</span>
+        <div class="hcr-bar">
+         <div class="hcr-bar-fill" id="bar3" style="width:0%"></div>
+        </div>
+       </div>
+       <div class="hero-card-row">
+        <span class="hcr-label">Best Crop</span> 
+        <span class="hcr-value" style="color:var(--primary)">🌾 Wheat</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   
+   <!-- FEATURES -->
+   <section class="features-section fade-in" id="features">
+    <div class="features-inner">
+     <div class="section-label">
+        <i data-lucide="sparkles" style="width:14px;height:14px"></i> What We Offer
+     </div>
+     <h2 class="section-title">Tools Built for Farmers</h2>
+     <p class="section-subtitle">Everything you need to understand your soil and make smarter agricultural decisions.</p>
+     <div class="features-grid">
+      <a href="./views/user/soil.html" class="feature-link">
+      <article class="feature-card">
+       <div class="feature-icon fi-soil"><i data-lucide="layers" style="width:28px;height:28px"></i>
+       </div>
+       <h3 class="feature-title" id="feat1Title">Soil Information</h3>
+       <p class="feature-desc">
+        Access detailed soil profiles including pH levels, nutrient composition, 
+        moisture content, and texture analysis for your region.
+       </p>
+      </article>
+      </a>
+      <a href="./views/user/crop.html" class="feature-link">
+      <article class="feature-card">
+       <div class="feature-icon fi-crop"><i data-lucide="wheat" style="width:28px;height:28px"></i>
+       </div>
+       <h3 class="feature-title" id="feat2Title">Crop Recommendations</h3>
+       <p class="feature-desc">Get personalized crop suggestions matched to your soil conditions, local climate, and seasonal patterns for maximum yield.</p>
+      </article>
+      </a>
+      <a href="./views/user/distributer.html" class="feature-link">
+      <article class="feature-card">
+       <div class="feature-icon fi-dist"><i data-lucide="truck" style="width:28px;height:28px"></i>
+       </div>
+       <h3 class="feature-title" id="feat3Title">Distributor Details</h3>
+       <p class="feature-desc">Connect with trusted seed and fertilizer distributors near you, with verified ratings and competitive pricing.</p>
+      </article>
+      </a>
+     </div>
+    </div>
+   </section>
+   
+   <!-- STATS -->
+   <section class="stats-section fade-in">
+    <div class="stats-inner">
+     <div class="stat-item">
+      <div class="stat-number" data-count="12000">
+       0
+      </div>
+      <div class="stat-label">
+       Farmers Helped
+      </div>
+     </div>
+     <div class="stat-item">
+      <div class="stat-number" data-count="340">
+       0
+      </div>
+      <div class="stat-label">
+       Soil Types Mapped
+      </div>
+     </div>
+     <div class="stat-item">
+      <div class="stat-number" data-count="95">
+       0
+      </div>
+      <div class="stat-label">
+       Crop Varieties
+      </div>
+     </div>
+     <div class="stat-item">
+      <div class="stat-number" data-count="500">
+       0
+      </div>
+      <div class="stat-label">
+       Distributors Listed
+      </div>
+     </div>
+    </div>
+   </section>
+   
+   <!-- CTA -->
+   <section class="cta-section fade-in">
+    <div class="cta-inner">
+     <h2 class="cta-title">Ready to Grow Smarter?</h2>
+     <p class="cta-desc">Join thousands of farmers using soil intelligence to transform their harvests.</p>
+     <a href="#" class="cta-btn" onclick="event.preventDefault()"> Start Free Today 
+        <i data-lucide="arrow-right" style="width:18px;height:18px"></i>
+     </a>
+    </div>
+   </section>
+   
+   <!-- FOOTER -->
+   <footer class="site-footer">
+    <div class="footer-inner">
+     <div class="footer-col">
+      <div class="footer-brand-text">
+       SoilAgent
+      </div>
+      <p class="footer-brand-desc">Helping farmers make smarter decisions through soil science and data-driven crop recommendations.</p>
+     </div>
+     <div class="footer-col">
+      <div class="footer-col-title">
+       Quick Links
+      </div>
+      <ul>
+       <li><a href="#home">Home</a></li>
+       <li><a href="#features">Features</a></li>
+       <li><a href="./html/about.html">About Us</a></li>
+      </ul>
+     </div>
+     <div class="footer-col">
+      <div class="footer-col-title">
+       Contact
+      </div>
+      <div class="footer-contact-item"><i data-lucide="mail"></i> <span id="footerEmail">contact@soilfarming.com</span>
+      </div>
+      <div class="footer-contact-item"><i data-lucide="phone"></i> <span>+1 (555) 234-5678</span>
+      </div>
+      <div class="footer-contact-item"><i data-lucide="map-pin"></i> <span>AgriTech Park, Green Valley</span>
+      </div>
+     </div>
+    </div>
+    <div class="footer-bottom">
+     © 2025 SoilAgent. All rights reserved.
+    </div>
+   </footer>
+  </div>
+  <script>
+    // Mobile menu
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+    mobileToggle.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      mobileMenu.classList.toggle('open', menuOpen);
+    });
+    function closeMobile() {
+      menuOpen = false;
+      mobileMenu.classList.remove('open');
+    }
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    document.querySelector('.app-wrapper').addEventListener('scroll', function() {
+      navbar.classList.toggle('scrolled', this.scrollTop > 20);
+    });
+
+    // Animate bars on load
+    setTimeout(() => {
+      document.getElementById('bar1').style.width = '72%';
+      document.getElementById('bar2').style.width = '58%';
+      document.getElementById('bar3').style.width = '84%';
+    }, 600);
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          // Trigger stat counting
+          e.target.querySelectorAll('.stat-number[data-count]').forEach(el => animateCount(el));
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Count-up animation
+    function animateCount(el) {
+      if (el.dataset.animated) return;
+      el.dataset.animated = '1';
+      const target = parseInt(el.dataset.count);
+      const duration = 1800;
+      const start = performance.now();
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(target * ease).toLocaleString() + (target >= 1000 ? '+' : progress >= 1 ? '+' : '');
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    lucide.createIcons();
+  </script>
+<script src="./javascript/navbar.js"></script>
+</body>
+</html>

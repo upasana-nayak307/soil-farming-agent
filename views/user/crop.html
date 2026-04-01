@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Recommendation System</title>
+  <link href="../../css/crop.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=partly_cloudy_day" />
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="app-wrapper">
+    
+    <!-- Navbar -->
+    <nav class="navbar">
+    <div class="navbar-content"><a href="../../index.html" class="navbar-logo">
+      <div class="navbar-logo-icon">
+       🌱
+      </div><span class="navbar-logo-text">SoilAgent</span> </a>
+     <div class="navbar-menu">
+        <a href="./soil.html" class="navbar-link">Soil</a> 
+        <a href="./distributer.html" class="navbar-link">Distributor</a>
+        <a href="#recommendationForm" class="navbar-link active">Crop recommendation</a> 
+        <button class="logout-btn" onclick="handleLogout()">Logout</button>
+     </div>
+    </div>
+   </nav>
+   <!-- Main Content -->
+   <main class="content" role="main">
+    <div class="content-wrapper">
+    <!-- Header -->
+     <header class="page-header">
+      <div class="page-header-icon">
+       <span class="material-symbols-outlined">partly_cloudy_day</span>
+      </div>
+      <h1 class="page-title" id="pageTitle">Crop Recommendation System</h1>
+      <p class="page-subtitle" id="pageSubtitle">Get personalized crop recommendations based on your soil and season</p>
+     </header>
+
+     <!-- Results Section -->
+     <section class="results-section" id="resultsSection" aria-label="Crop recommendations">
+      <div class="results-header">
+       <h2 class="results-title" id="resultsTitle">Recommended Crops</h2>
+      </div>
+
+      <div class="crop-grid" id="cropGrid">
+      </div>
+
+      <div class="no-results" id="noResults" style="display: none;">
+       <div class="no-results-icon">
+        🌱
+       </div>
+       <p class="no-results-text">No crops found for this combination. Try different options!</p>
+      </div>
+     </section>
+    </div>
+   </main>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
+<script src="../../javascript/navbar.js"></script>
+<script src="../../javascript/crop.js"></script>
+</body>
+</html>

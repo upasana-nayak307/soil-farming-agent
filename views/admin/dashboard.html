@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en" style="height:100%;margin:0;">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farm Admin Dashboard</title>
+  <link href="../../css/dashboard.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+ </head>
+ <body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div id="sidebar-overlay" onclick="toggleSidebar()"></div>
+   <div class="sidebar-brand">
+    <div class="brand-icon" style="font-size: 22px;">
+      🌱
+    </div>
+    <div>
+     <h1 id="brand-title">SoilAgent</h1>
+     <span style="font-size: 15px;">Farm Management</span>
+    </div>
+   </div>
+   <nav class="sidebar-nav">
+    <div class="sidebar-nav-label">
+     Main
+    </div>
+    <a class="active" data-page="dashboard" onclick="switchPage('dashboard')"> 
+      <i data-lucide="layout-dashboard"></i> Dashboard 
+    </a> 
+    <a data-page="soil" onclick="switchPage('soil')"> 
+      <i data-lucide="mountain"></i> Manage Soil 
+    </a> 
+    <a data-page="distributors" onclick="switchPage('distributors')"> 
+      <i data-lucide="truck"></i> Manage Distributors 
+    </a>
+    <a data-page="crops" onclick="switchPage('crop')"> 
+      <i data-lucide="wheat"></i> Crop recommendations
+    </a>
+    <div class="sidebar-nav-label">
+     System
+    </div>
+    <a data-page="settings" onclick="switchPage('settings')"> 
+      <i data-lucide="settings"></i> Settings 
+    </a>
+    <a data-page="logout" onclick="handleLogout()"> 
+      <i data-lucide="log-out"></i> Log Out
+    </a>
+   </nav>
+  </aside>
+  
+  <!-- Main -->
+  <div class="main-wrap">
+   <header class="topbar">
+    <div class="topbar-left">
+     <h2 id="page-title">Dashboard</h2>
+     <p id="page-subtitle">Overview of your farming operations</p>
+    </div>
+    <div class="topbar-right">
+     <div class="topbar-avatar" id="user-avatar"></div>
+    </div>
+   </header>
+   <main class="main-content">
+    
+    <!-- Dashboard Page -->
+    <div id="page-dashboard">
+     <div class="overview-row">
+      <div class="ov-card">
+       <div class="ov-card-icon soil">
+        <i data-lucide="layers"></i>
+       </div>
+       <div class="ov-card-info">
+        <h3 id="total-soil"></h3>
+        <p>Total Soil Types</p>
+       </div>
+      </div>
+      <div class="ov-card">
+       <div class="ov-card-icon dist">
+        <i data-lucide="users"></i>
+       </div>
+       <div class="ov-card-info">
+        <h3 id="total-dist"></h3>
+        <p>Total Distributors</p>
+       </div>
+      </div>
+      <div class="ov-card">
+       <div class="ov-card-icon crop">
+        <i data-lucide="wheat"></i>
+       </div>
+       <div class="ov-card-info">
+        <h3 id="active-crops"></h3>
+        <p>Active Crops</p>
+       </div>
+      </div>
+      <div class="ov-card">
+       <div class="ov-card-icon order">
+        <i data-lucide="package"></i>
+       </div>
+       <div class="ov-card-info">
+        <h3>38</h3>
+        <p>Pending Orders</p>
+       </div>
+      </div>
+     </div>
+     
+     <!-- Quick Soil Table -->
+    <div class="section">
+      <div class="section-header">
+       <h3>Recent Soil Types</h3>
+       <button class="btn btn-primary" onclick="openModal('soil')" id="add-soil"> 
+        <i data-lucide="plus"></i> Add Soil 
+       </button>
+      </div>
+      <div class="data-table-wrap">
+       <table class="data-table">
+        <thead>
+         <tr>
+          <th>Soil Name</th>
+          <th>pH Level</th>
+          <th>Moisture</th>
+          <th>Nutrients</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Action</th>
+         </tr>
+        </thead>
+        <tbody id="soil-table-body"></tbody>
+       </table>
+       <div id="soil-empty" class="empty-state">
+        <i data-lucide="mountain"></i>
+        <p>No soil types added yet</p>
+       </div>
+      </div>
+
+      <div class="confirm-overlay" id="confirmOverlay">
+        <div class="confirm-box">
+          <h3>Confirm Delete?</h3>
+          <p id="confirmText">This action cannot be undone.</p>
+          <div class="confirm-actions">
+              <button class="btn-confirm-del" id="confirmDelBtn">Delete</button> 
+              <button class="btn-confirm-cancel" id="confirmCancelBtn">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- quick crop table -->
+     <div class="section">
+      <div class="section-header">
+       <h3>All the Crops</h3>
+       <button class="btn btn-primary" onclick="openModal('crop')" id="add-crop"> 
+        <i data-lucide="plus"></i> Add crop
+       </button>
+      </div>
+      <div class="data-table-wrap">
+       <table class="data-table">
+        <thead>
+         <tr>
+          <th>Name</th>
+          <th>Soil Type</th>
+          <th>Season</th>
+          <th>Water requirement</th>
+          <th>Growth Duration</th>
+          <th>Status</th>
+          <th>Action</th>
+         </tr>
+        </thead>
+        <tbody id="crop-table-body"></tbody>
+       </table>
+       <div id="crop-empty" class="empty-state">
+        <i data-lucide="wheat"></i>
+        <p>No crops added yet</p>
+       </div>
+      </div>
+    </div>
+     
+    <!-- Quick Distributors Table -->
+     <div class="section">
+      <div class="section-header">
+       <h3>Recent Distributors</h3>
+       <button class="btn btn-secondary" onclick="openModal('distributor')" id="add-distributor"> 
+        <i data-lucide="plus"></i> Add Distributor 
+       </button>
+      </div>
+      <div class="data-table-wrap">
+       <table class="data-table">
+        <thead>
+         <tr>
+          <th>Company Name</th>
+          <th>Address</th>
+          <th>Phone Number</th>
+          <th>Email</th>
+          <th>Products</th>
+          <th>Status</th>
+          <th>Action</th>
+         </tr>
+        </thead>
+        <tbody id="dist-table-body"></tbody>
+       </table>
+       <div id="dist-empty" class="empty-state">
+        <i data-lucide="truck"></i>
+        <p>No distributors added yet</p>
+       </div>
+      </div>
+     </div>
+    </div>
+    
+    <!-- Soil Page -->
+    <div id="page-soil" style="display:none;">
+     <div class="section">
+      <div class="section-header">
+       <h3>All Soil Types</h3><button class="btn btn-primary" onclick="openModal('soil')"> <i data-lucide="plus"></i> Add Soil </button>
+      </div>
+      <div class="data-table-wrap">
+       <table class="data-table">
+        <thead>
+         <tr>
+          <th>Soil Name</th>
+          <th>pH Level</th>
+          <th>Moisture</th>
+          <th>Nutrients</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Action</th>
+         </tr>
+        </thead>
+        <tbody id="soil-table-full"></tbody>
+       </table>
+       <div id="soil-empty-full" class="empty-state"><i data-lucide="mountain"></i>
+        <p>No soil types added yet</p>
+       </div>
+      </div>
+     </div>
+    </div>
+
+    <!-- crop page -->
+    <div id="page-crop" style="display:none;">
+     <div class="section">
+      <div class="section-header">
+       <h3>All crop Types</h3>
+       <button class="btn btn-primary" onclick="openModal('crop')"> 
+        <i data-lucide="plus"></i> Add crop </button>
+      </div>
+      <div class="data-table-wrap">
+       <table class="data-table">
+        <thead>
+         <tr>
+          <th>Name</th>
+          <th>Soil Type</th>
+          <th>Season</th>
+          <th>Water requirement</th>
+          <th>Growth Duration</th>
+          <th>Status</th>
+          <th>Action</th>
+         </tr>
+        </thead>
+        <tbody id="soil-table-full"></tbody>
+       </table>
+       <div id="crop-empty-full" class="empty-state">
+        <i data-lucide="wheat"></i>
+        <p>No crop types added yet</p>
+       </div>
+      </div>
+     </div>
+    </div>
+    
+    <!-- Distributors Page -->
+    <div id="page-distributors" style="display:none;">
+     <div class="section">
+      <div class="section-header">
+       <h3>All Distributors</h3><button class="btn btn-secondary" onclick="openModal('distributor')"> <i data-lucide="plus"></i> Add Distributor </button>
+      </div>
+      <div class="data-table-wrap">
+       <table class="data-table">
+        <thead>
+         <tr>
+          <th>Company Name</th>
+          <th>Address</th>
+          <th>Phone Number</th>
+          <th>Email</th>
+          <th>Products</th>
+          <th>Status</th>
+          <th>Action</th>
+         </tr>
+        </thead>
+        <tbody id="dist-table-full"></tbody>
+       </table>
+       <div id="dist-empty-full" class="empty-state"><i data-lucide="truck"></i>
+        <p>No distributors added yet</p>
+       </div>
+      </div>
+     </div>
+    </div>
+    
+    <!-- Settings Page -->
+    <div id="page-settings" style="display:none;">
+     <div class="section">
+      <div class="data-table-wrap" style="padding:32px;text-align:center;"><i data-lucide="settings" style="width:40px;height:40px;opacity:0.2;margin-bottom:12px;"></i>
+       <p style="opacity:0.4;font-size:14px;">Settings panel — coming soon</p>
+      </div>
+     </div>
+    </div>
+   </main>
+  </div>
+  
+  <!-- Soil Modal -->
+<div class="modal-overlay" id="modal-soil">
+  <div class="modal">
+    <h3>Add Soil Type</h3>
+    <form id="soil-form" onsubmit="addingSoil(event)" method="post" novalidate>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="soilName">Soil Name</label>
+          <input type="text" placeholder="Red Loam" id="soilName" required>
+          <span class="error-text" id="soilError"></span>
+        </div>
+        <div class="form-group">
+          <label for="soilType">Soil Type</label>
+          <input type="text" placeholder="Sandy / Clay" id="soilType" required>
+          <span class="error-text" id="typeError"></span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phLevel">pH Level</label>
+          <input type="number" placeholder="6.5" id="phLevel" required step="any">
+          <span class="error-text" id="phError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="moisture">Moisture (%)</label>
+          <input type="number" placeholder="45" id="moisture" required>
+          <span class="error-text" id="moistureError"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="nutrients">Nutrients</label>
+        <input type="text" placeholder="Nitrogen, Potassium" id="nutrients" required>
+        <span class="error-text" id="nutrientsError"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="crops">Crops</label>
+        <input type="text" placeholder="e.g. Rice, wheat" id="crops" required>
+        <span class="error-text" id="cropsError"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Characteristics</label>
+        <textarea placeholder="Short description..." rows="2" id="description" maxlength="500"></textarea>
+        <span class="error-text" id="descriptionError"></span>
+      </div>
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status">
+          <option>Active</option>
+          <option>Testing</option>
+          <option>Depleted</option>
+        </select>
+        <span class="error-text" id="statusError"></span>
+      </div>
+
+      <div class="modal-actions"> 
+        <button type="button" class="btn btn-outline" onclick="closeModal('soil')" id="cancel-btn1"> 
+          Cancel 
+        </button> 
+        <button type="submit" class="btn btn-primary" id="submitBtn">
+          Save Soil
+        </button> 
+      </div>
+    </form>
+  </div>
+</div>
+  
+<!-- Distributor Modal -->
+<div class="modal-overlay" id="modal-distributor">
+  <div class="modal">
+    <h3>Add Distributor</h3>
+
+    <form id="dist-form" onsubmit="addingDistributor(event)" method="post" novalidate>
+     <div class="form-group">
+      <label for="dist-company">Company Name</label> 
+      <input type="text" id="dist-company" placeholder="e.g. GreenFields Co." required>
+      <span class="error-text" id="companyError"></span>
+     </div>
+     <div class="form-group">
+      <label for="dist-address">Address</label> 
+      <input type="text" id="dist-address" placeholder="e.g. 456 Farm Lane, Rural Town, RT 54321" required>
+      <span class="error-text" id="addressError"></span>
+     </div>
+     <div class="form-group">
+      <label for="dist-number">Phone number</label> 
+      <input type="number" id="dist-number" placeholder="e.g. 9861247659" required>
+      <span class="error-text" id="contactError"></span>
+     </div>
+     <div class="form-group">
+      <label for="dist-email">Email</label> 
+      <input type="email" id="dist-email" placeholder="e.g. abcd@gmail.com" required>
+      <span class="error-text" id="mailError"></span>
+     </div>
+     <div class="form-group">
+      <label for="dist-products">Products Available</label>
+      <input 
+        type="text" 
+        id="dist-products" 
+        placeholder="e.g. Paddy Seeds, Wheat Seeds, Urea Fertilizer" 
+        required
+      >
+      <span class="error-text" id="productsError"></span>
+    </div>
+     <div class="form-group">
+      <label for="dist-status">Status</label> 
+      <select id="dist-status"> 
+        <option value="Active">Active</option>  
+        <option value="Inactive">Inactive</option> 
+      </select>
+      <span class="error-text" id="statusError"></span>
+     </div>
+     <div class="modal-actions">
+      <button type="button" class="btn btn-outline" onclick="closeModal('distributor')" id="cancel-btn2">
+        Cancel
+      </button> 
+      <button class="btn btn-secondary" id="submitBtn2">Save Distributor</button>
+     </div>
+    </form>
+  </div>
+</div>
+
+
+  <!-- Crop Modal -->
+  <div class="modal-overlay" id="modal-crop">
+   <div class="modal">
+    <h3>Add Crops</h3>
+
+    <form id="crop-form" onsubmit="addCrops(event)" method="post" novalidate>
+     <div class="form-group">
+      <label for="crop-name">Crop Name</label> 
+      <select id="crop-name">
+        <option value="">Select crops</option>
+      </select>
+      <span class="error-text" id="cropNameError"></span>
+     </div>
+     <div class="form-group">
+      <label for="crop-soilType">Soil Type</label> 
+      <select id="crop-soilType">
+        <option value="">Select soil type</option>
+      </select>
+      <span class="error-text" id="cropTypeError"></span>
+     </div>
+     <div class="form-group">
+      <label for="crop-water">Crop Duration</label> 
+      <input type="text" id="crop-duration" placeholder="e.g. 90days" required>
+      <span class="error-text" id="DurationError"></span>
+     </div>
+      <div class="form-group">
+        <label for="crop-description">Characteristics</label>
+        <textarea placeholder="Short description..." rows="2" maxlength="500" id="crop-description"></textarea>
+        <span class="error-text" id="descError"></span>
+      </div>
+    <div class="form-row">
+     <div class="form-group">
+      <label for="crop-season">Season</label> 
+      <select id="crop-season"> 
+        <option value="Active">Season</option> 
+        <option value="Summer">Summer</option> 
+        <option value="Rainy">Rainy</option> 
+        <option value="Winter">Winter</option>
+        <option value="Spring">Spring</option>
+        <option value="Autumn">Autumn</option>
+      </select>
+      <span class="error-text" id="seasonError"></span>
+     </div>
+     <div class="form-group">
+      <label for="crop-water">Water Requirement</label> 
+      <select id="crop-water"> 
+        <option value="active">Select water requirement</option>
+        <option value="low">Low</option> 
+        <option value="medium">Medium</option> 
+        <option value="high">High</option> 
+      </select>
+      <span class="error-text" id="waterError"></span>
+     </div>
+     </div>
+     <div class="form-group">
+      <label for="crop-status">Status</label> 
+      <select id="crop-status"> 
+        <option value="Active">Active</option> 
+        <option value="Pending">Pending</option> 
+        <option value="Inactive">Inactive</option> 
+      </select>
+      <span class="error-text" id="cropStatusError"></span>
+     </div>
+     <div class="modal-actions">
+      <button type="button" class="btn btn-outline" onclick="closeModal('crop')" id="cancel-btn">
+        Cancel
+      </button> 
+      <button class="btn btn-secondary" id="submitBtn1">Save Crop</button>
+     </div>
+    </form>
+   </div>
+  </div>
+  
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+  <script>
+
+    // ---- Pages ----
+    const pageInfo = {
+      dashboard: { title: 'Dashboard', subtitle: 'Overview of your farming operations' },
+      soil: { title: 'Manage Soil', subtitle: 'Add and manage soil types' },
+      distributors: { title: 'Manage Distributors', subtitle: 'Add and manage distributors' },
+      crops:{title:"Crop Recommendations",subtitle:'Add and manage crops'},
+      settings: { title: 'Settings', subtitle: 'System configuration' }
+    };
+
+    function switchPage(page) {
+      document.querySelectorAll('[id^="page-"]').forEach(el => el.style.display = 'none');
+      const target = document.getElementById('page-' + page);
+      if (target) target.style.display = 'block';
+
+      document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+      const navLink = document.querySelector(`.sidebar-nav a[data-page="${page}"]`);
+      if (navLink) navLink.classList.add('active');
+
+      const info = pageInfo[page] || pageInfo.dashboard;
+      document.getElementById('page-title').textContent = info.title;
+      document.getElementById('page-subtitle').textContent = info.subtitle;
+    }
+
+    // ---- Modals ----
+    function openModal(type) {
+      document.getElementById('modal-' + type).classList.add('show');
+    }
+
+    function closeModal(type) {
+      document.getElementById('modal-' + type).classList.remove('show');
+    }
+
+    // Close on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.classList.remove('show');
+      });
+    });
+
+   
+      lucide.createIcons();
+      function handleLogout(){
+        localStorage.clear();
+        window.location.href='http://127.0.0.1:5500/soil-farming-agent/html/login.html'
+      }
+
+      // loading name
+      function loadAvatar(){
+        const name=localStorage.getItem("name");
+        if(!name) return;
+
+        const initial=name
+        .split(" ")
+        .map(word => word[0].toUpperCase())
+        .join("")
+        .slice(0, 2); 
+
+        document.getElementById("user-avatar").innerText=initial
+      }
+      loadAvatar();
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../../javascript/soil.js"></script>
+<script src="../../javascript/crop.js"></script>
+<script src="../../javascript/dist.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soil Details - Soil Farming Agent</title>
+  <link href="../../css/soilUser.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div class="app-wrapper">
+    
+    <!-- Navbar -->
+   <nav class="navbar">
+    <div class="navbar-content"><a href="../../index.html" class="navbar-logo">
+      <div class="navbar-logo-icon">
+       🌱
+      </div><span class="navbar-logo-text">SoilAgent</span> </a>
+     <div class="navbar-menu">
+        <a href="#soilGrid" class="navbar-link active">Soil</a> 
+        <a href="./distributer.html" class="navbar-link">Distributor</a> 
+        <a href="./crop.html" class="navbar-link">Crop recommendation</a>
+        <button class="logout-btn" onclick="handleLogout()">Logout</button>
+     </div>
+    </div>
+   </nav>
+   
+   <!-- Main Content -->
+   <div class="main-content">
+    <div class="content-wrapper">
+     <div class="page-header">
+      <h1 class="page-title">Soil Details</h1>
+      <p class="page-subtitle">Explore different soil types and their characteristics</p>
+     </div>
+     
+     <!-- Soil Cards Grid -->
+     <div class="soil-grid" id="soilGrid">
+        <!-- Cards will be generated here -->
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    // Set active navbar link
+    function setActive(event, page) {
+      event.preventDefault();
+      const links = document.querySelectorAll('.navbar-link');
+      links.forEach(link => link.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    // Handle logout
+    function handleLogout() {
+      if (confirm('Are you sure you want to logout?')) {
+        // In a real app, this would redirect to login
+        console.log('Logged out successfully');
+        alert('You have been logged out successfully.');
+      }
+    }
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/axios@1.13.2/dist/axios.min.js"></script>
+<script src="../../javascript/soil.js"></script>
+</body>
+</html>

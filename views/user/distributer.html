@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distributor Details - Soil Farming Agent</title>
+  <link href="../../css/distributer.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div class="app-wrapper">
+   <!-- Navbar -->
+   <nav class="navbar">
+    <div class="navbar-content">
+     <a href="../../index.html" class="navbar-logo">
+      <div class="navbar-logo-icon">
+       🌱
+      </div><span class="navbar-logo-text">SoilAgent</span> </a>
+     <div class="navbar-menu">
+      <a href="./soil.html" class="navbar-link">Soil</a> 
+      <a href="#distributor" class="navbar-link active">Distributor</a> 
+      <a href="./crop.html" class="navbar-link">Crop recommendation</a>
+      <button class="logout-btn" onclick="handleLogout()">Logout</button>
+     </div>
+    </div>
+   </nav>
+   
+   <!-- Main Content -->
+   <div class="main-content">
+    <div class="content-wrapper">
+     <div class="page-header">
+      <h1 class="page-title">Distributor Details</h1>
+      <p class="page-subtitle">Find authorized seed and crop distributors near you</p>
+     </div>
+     <!-- Distributor Cards Grid -->
+     <div class="dist-grid" id="distGrid">
+      <!-- Cards will be generated here -->
+
+     </div>
+    </div>
+   </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../../javascript/navbar.js"></script>
+<script src="../../javascript/dist.js"></script>
+</body>
+</html>
