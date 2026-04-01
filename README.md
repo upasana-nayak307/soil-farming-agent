@@ -173,40 +173,44 @@ Model → Controller/Route → Frontend View/JS
 ---
 
 ### 🧩 API Routes Overview
-Authentication Routes
-Method	 Route	        Description
-POST	/auth/register	Register user
-POST	/auth/login	    Login user
+Authentication Routes :
+
+| Method | Route          | Description    |
+|--------|----------------|----------------|
+| POST   | /auth/register | Register user  |
+| POST   | /auth/login    | Login user     |
 
 Soil Routes :
 
-Method       Route	                    Description
-POST	    /soil/addSoil	            Add soil details (Admin)
-GET	        /soil/getSoil	            Get all soil types
-PUT         /soil/updateSoil/:id	    Update soil details
-DELETE      /soil/removeSoil/:id        Delete soil 
+| Method | Route                 | Description        |
+|--------|-----------------------|--------------------|
+| POST   | /soil/addSoil         | Add soil details   |
+| GET    | /soil/getSoil         | Get all soil types |
+| PUT    | /soil/updateSoil/:id  | Update soil details|
+| DELETE | /soil/removeSoil/:id  | Delete soil        |
 
 Crop Recommendation Routes :
 
-Method	    Route	                        Description
-POST	    /crops/addCrops	                Add crop recommendation
-GET	        /crop/getCrops	                Get recommended crops
-PUT         /crop/updateCrops/:id           Update crops details
-DELETE      /crop/removeCrop/:id            Delete a crop
+| Method | Route                    | Description              |
+|--------|--------------------------|--------------------------|
+| POST   | /crops/addCrops          | Add crop recommendation  |
+| GET    | /crop/getCrops           | Get recommended crops    |
+| PUT    | /crop/updateCrops/:id    | Update crop details      |
+| DELETE | /crop/removeCrop/:id     | Delete crop              |
 
 Distributor Routes :
 
-Method	    Route	                                     Description
-POST	    /distributors/addDistributor	             Add a distributor
-GET	        /distributors/getDistributors                Get all distributor details
-PUT         /distributors/updateDistributors/:id         Update the details
-DELETE      /distributors/deleteDistributor/:id          Delete a distributor
+| Method | Route                                  | Description          |
+|--------|----------------------------------------|----------------------|
+| POST   | /distributors/addDistributor           | Add distributor      |
+| GET    | /distributors/getDistributors          | Get all distributors |
+| PUT    | /distributors/updateDistributors/:id   | Update distributor   |
+| DELETE | /distributors/deleteDistributor/:id    | Delete distributor   |
 
 ---
 
 ### 🖼 Views Overview
-    Admin
-    Dashboard (post/update soil & distributor data)
+    AdminDashboard (post/update/delete soil, crop & distributor data)
     User Pages
     soil.html → Show soil details
     crop.html → Recommended crops
@@ -254,4 +258,5 @@ Firebase hosting option
 
 ### 👩🏻‍💻 Author
 **Upasana Nayak**
+
 Full-Stack Developer
