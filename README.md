@@ -80,7 +80,70 @@ The User views soil details, recommended crops, and distributor information.
 
 ### 📂 Project Folder Structure
 ```
-(KEEP YOUR TREE EXACTLY AS YOU HAVE IT)
+soil-farming-agent/
+│
+├── html/
+│   ├── about.html
+│   ├── login.html
+│   └── register.html
+│
+├── config/
+│   └── database.js
+│
+│
+├── controller/
+│   ├── authController.js
+│   ├── cropRecommend.js
+│   ├── distributorController.js
+│   └── soilController.js
+│
+├── css/
+│   ├── about.css
+│   ├── crop.css
+│   ├── dashboard.css
+│   ├── distributor.css
+│   ├── index.css
+│   ├── register.css
+│   └── soil.css
+│
+├── javascript/
+│   ├── crop.js
+│   ├── cropUser.js
+│   ├── dist.js
+│   ├── navbar.js
+│   ├── register.js
+│   └── soil.js
+│
+│
+├── middleware/
+│   └── authMiddleware.js
+│
+├── models/
+│   ├── authModel.js
+│   ├── cropRecommend.js
+│   ├── distributorModel.js
+│   └── soilModel.js
+│
+├── routes/
+│   ├── authRoutes.js
+│   ├── cropRoutes.js
+│   ├── distRoutes.js
+│   └── soilRoutes.js
+│
+├── views/
+│   ├── admin/
+│   │   └── dashboard.html
+│   └── user/
+│       ├── crop.html
+│       ├── distributer.html
+│       └── soil.html
+│
+├── .env
+├── index.html
+├── package.json
+├── package-lock.json
+├── server.js
+└── README.md
 ```
 
 ---
